@@ -1,14 +1,13 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import Image from "next/image";
 
 export default function MediaPicker() {
   const [preview, setPreview] = useState<string | null>(null);
   const onFilelected = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
 
-    if (!files) return;
+    if (!files || !files.length) return setPreview(null);
 
     const previewUrl = URL.createObjectURL(files[0]);
     setPreview(previewUrl);
