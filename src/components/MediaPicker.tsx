@@ -1,8 +1,12 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import Image from "next/image";
+interface MediaPickerProps {
+  previewEdit?: string;
+}
 
-export default function MediaPicker() {
+export default function MediaPicker({ previewEdit }: MediaPickerProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const onFilelected = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -27,8 +31,17 @@ export default function MediaPicker() {
         <img
           width={40}
           height={40}
-          src={preview}
+          src={preview ? preview : previewEdit}
           alt="preview image"
+          className="aspect-video w-full rounded-lg object-cover"
+        />
+      )}
+      {previewEdit && preview == null && (
+        <Image
+          src={previewEdit}
+          alt=""
+          width={592}
+          height={280}
           className="aspect-video w-full rounded-lg object-cover"
         />
       )}

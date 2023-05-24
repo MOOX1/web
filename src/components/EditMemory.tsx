@@ -26,7 +26,6 @@ export default function EditMemory({ memory }: EditMemoryProps) {
 
     router.push("/");
     router.refresh();
-    console.log(response, "delete");
   };
 
   return (
